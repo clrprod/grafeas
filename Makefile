@@ -8,6 +8,9 @@
 
 .PHONY: build fmt test vet clean go_protos grafeas_go_v1alpha1 swagger_docs
 
+.EXPORT_ALL_VARIABLES:
+	GO111MODULE=on
+
 SRC = $(shell find . -type f -name '*.go' -not -path "./vendor/*")
 CLEAN := *~
 
@@ -17,6 +20,7 @@ default: .check_makefile_in_gopath build
 	@touch $@
 
 EXPECTED_MAKE = ${GOPATH}/src/github.com/grafeas/grafeas/Makefile
+
 
 .check_makefile_in_gopath:
 	if [ "$(realpath ${EXPECTED_MAKE})" != "$(realpath $(lastword $(MAKEFILE_LIST)))" ]; \
